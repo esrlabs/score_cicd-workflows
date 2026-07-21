@@ -59,12 +59,9 @@ jobs:
           cache: false
 
       - name: Setup Bazel with shared caching
-        uses: bazel-contrib/setup-bazel@0.18.0
+        uses: eclipse-score/cicd-actions/setup-bazel-cache@af1be61755b13c1f33b6c250080dc6ac025012f1
         with:
-          disk-cache: true
-          repository-cache: true
-          bazelisk-cache: true
-          cache-save: ${{ github.event_name == 'push' }}
+          unique-cache-name: ${{ github.job }}
 
       - name: Run Tests via Bazel
         run: |

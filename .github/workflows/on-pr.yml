@@ -209,12 +209,9 @@ jobs:
 
       - name: ⚙️ Setup Bazel with shared caching
         if: ${{ !cancelled() && steps.detect.outputs.has_bazel == 'true' }}
-        uses: bazel-contrib/setup-bazel@0.18.0
+        uses: eclipse-score/cicd-actions/setup-bazel-cache@af1be61755b13c1f33b6c250080dc6ac025012f1
         with:
-          disk-cache: false
-          repository-cache: false
-          bazelisk-cache: true
-          cache-save: false
+          unique-cache-name: ${{ github.job }}
 
       - name: 🕵️ Detect Bazel targets
         id: bazel
