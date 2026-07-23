@@ -103,10 +103,13 @@ jobs:
           level: 2
 
       - name: Checkout repository (Handle all events)
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
         with:
           ref: ${{ github.head_ref || github.event.pull_request.head.ref || github.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          # This job is gated by the approval job.
+          # A reviewer must validate the content before approving the workflow.
+          allow-unsafe-pr-checkout: true
 
       - name: Setup Bazel with shared caching
         uses: eclipse-score/cicd-actions/setup-bazel-cache@af1be61755b13c1f33b6c250080dc6ac025012f1
